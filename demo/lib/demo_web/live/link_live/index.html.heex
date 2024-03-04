@@ -1,0 +1,41 @@
+<.header>
+  Listing Links
+  <:actions>
+    <.link patch={~p"/links/new"}>
+      <.button>New Link</.button>
+    </.link>
+  </:actions>
+</.header>
+
+<.table
+  id="links"
+  rows={@streams.links}
+  row_click={fn {_id, link} -> JS.navigate(~p"/links/#{link}") end}
+>
+  <:col :let={{_id, link}} label="Url"><%= link.url %></:col>
+  <:action :let={{_id, link}}>
+    <div class="sr-only">
+      <.link navigate={~p"/links/#{link}"}>Show</.link>
+    </div>
+    <.link patch={~p"/links/#{link}/edit"}>Edit</.link>
+  </:action>
+  <:action :let={{id, link}}>
+    <.link
+      phx-click={JS.push("delete", value: %{id: link.id}) |> hide("##{id}")}
+      data-confirm="Are you sure?"
+    >
+      Delete
+    </.link>
+  </:action>
+</.table>
+
+<.modal :if={@live_action in [:new, :edit]} id="link-modal" show on_cancel={JS.patch(~p"/links")}>
+  <.live_component
+    module={DemoWeb.LinkLive.FormComponent}
+    id={@link.id || :new}
+    title={@page_title}
+    action={@live_action}
+    link={@link}
+    patch={~p"/links"}
+  />
+</.modal>
