@@ -17,8 +17,11 @@ defmodule Demo.Links do
       [%Link{}, ...]
 
   """
-  def list_links do
-    Repo.all(Link)
+  def list_links(user_id) do
+    Repo.all(
+      from l in Link,
+        where: l.user_id == ^user_id
+    )
   end
 
   @doc """

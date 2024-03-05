@@ -1,0 +1,12 @@
+<h1 class="grow text-2xl font-bold mb-6">Create a new Link</h1>
+
+<.form for={@form} phx-submit="submit">
+  <div class="flex gap-2 items-end">
+    <div class="grow">
+      <.input field={@form[:url]} type = "text" label="URL" />
+    </div>
+    <button class="bg-black border border-black hover:bg-gray-700 text-white font-bold py-2 px-3 rounded-md" phx-click="submit">
+      Create
+    </button>
+  </div>
+</.form>
