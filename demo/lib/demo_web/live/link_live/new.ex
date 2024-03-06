@@ -1,5 +1,6 @@
 defmodule DemoWeb.LinkLive.New do
   use DemoWeb, :live_view
+
   alias Demo.Links
 
   def mount(_params, _session, socket) do
@@ -7,7 +8,10 @@ defmodule DemoWeb.LinkLive.New do
 
     socket =
       socket
-      |> assign(:form, to_form(changeset))
+      |> assign(
+        :form,
+        to_form(changeset)
+      )
 
     {:ok, socket}
   end
@@ -28,7 +32,10 @@ defmodule DemoWeb.LinkLive.New do
       {:error, changeset} ->
         socket =
           socket
-          |> assign(:form, to_form(changeset))
+          |> assign(
+              :form,
+              to_form(changeset)
+            )
 
         {:noreply, socket}
     end

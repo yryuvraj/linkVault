@@ -9,6 +9,11 @@
   </.link>
 </div>
 
-<div :for={link <- @links}>
-  <%= link.url %>
+<div class="divide-y">
+  <div :for={link <- @links} class="py-2">
+    <div>
+      <div class="font-bold"> <%= link.url %> </div>
+      <div class="text-sm"> <%= link.inserted_at %> </div>
+    </div>
+  </div>
 </div>
